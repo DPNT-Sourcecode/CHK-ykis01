@@ -64,8 +64,6 @@ public class CheckoutSolutionTest {
     
     @Test
     public void testCheckout_2Eget1Bfree_returns80() {
-        assertEquals(80, checkout.checkout("BBE"));
+        assertEquals(80, checkout.checkout("EEB"));
     }
 }
-
-
