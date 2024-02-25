@@ -15,7 +15,7 @@ public class CheckoutSolution {
         inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
-        inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, 'E')));
+        inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, 'B')));
     }
 
     public Integer checkout(String skus) {
@@ -120,4 +120,23 @@ public class CheckoutSolution {
             return specialBundleOffer;
         }
     }
+    
+//    class FreeProductDiscount {
+//        private char discountedSku;
+//        private int discountedUnits;
+//        
+//        FreeProductDiscount(char discountedSku, int discoountedUnits) {
+//            this.discountedSku = discountedSku;
+//            this.discountedUnits = discoountedUnits;
+//        }
+//
+//        public char getDiscountedSku() {
+//            return discountedSku;
+//        }
+//
+//        public int getDiscoountedUnits() {
+//            return discountedUnits;
+//        }
+//    }
 }
+
