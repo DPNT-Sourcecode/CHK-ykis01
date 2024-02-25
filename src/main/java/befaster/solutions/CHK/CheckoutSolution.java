@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import befaster.runner.SolutionNotImplementedException;
+import befaster.solutions.CHK.CheckoutSolution.PricingInfo;
 
 /*
     CHK_R1
@@ -64,9 +65,15 @@ public class CheckoutSolution {
         }
         
         // Sum based on their quantity
+        int total = 0;
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
             Character sku = productQuantity.getKey();
             Integer quantity = productQuantity.getValue();
+            
+            PricingInfo productPricing = inventory.get(sku);
+            if (productPricing.getSpecialQuantityOffers().isEmpty()) {
+                total +=
+            }
             
         }
         
@@ -102,4 +109,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
