@@ -27,7 +27,7 @@ public class CheckoutSolution {
         inventory.put('H', new PricingInfo(10, Map.of(5, 45, 10, 80)));
         inventory.put('I', new PricingInfo(35));
         inventory.put('J', new PricingInfo(60));
-        inventory.put('K', new PricingInfo(70, Map.of(2, 150)));
+        inventory.put('K', new PricingInfo(70, Map.of(2, 120)));
         inventory.put('L', new PricingInfo(90));
         inventory.put('M', new PricingInfo(15));
         inventory.put('N', new PricingInfo(40, Collections.emptyMap(), Map.of(3, new FreeProductDiscount(1, 'M'))));
@@ -247,5 +247,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
