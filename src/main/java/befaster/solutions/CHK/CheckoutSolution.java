@@ -45,12 +45,6 @@ public class CheckoutSolution {
             // Get product pricing
             PricingInfo productPricing = inventory.get(sku);
 
-            // If it doesn't have any special offers, then use the regular pricing
-            if (productPricing.getSpecialQuantityOffers() == null) {
-                total += quantity * productPricing.getRegularPrice();
-                continue;
-            }
-
             // Iterate each of the special offers and apply them, from the best to the worst
             for (Entry<Integer, Integer> offer : productPricing.getSpecialQuantityOffers().entrySet()) {
                 // Try to apply the offer to most of the available quantity
@@ -58,6 +52,9 @@ public class CheckoutSolution {
                 // save the rest to be evaluated next
                 quantity = quantity % offer.getKey();
             }
+            
+            // The rest that doesn't have a special offer should be priced normally
+            total += quantity * productPricing.getRegularPrice();
         }
 
         return total;
@@ -92,6 +89,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
