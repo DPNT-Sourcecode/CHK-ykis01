@@ -45,9 +45,9 @@ public class CheckoutSolution {
                 if (originalSkuQuantity >= discount.getMinimumQuantity()) {
                     // If the rest is not 0 then it couldn't be properly applicable one time
                     int applicableAmmount = originalSkuQuantity / triggeringQuantity;
-                    if (originalSkuQuantity % discount.getMinimumQuantity() != 0) {
-                        applicableAmmount--;
-                    }
+//                    if (originalSkuQuantity % discount.getMinimumQuantity() != 0) {
+//                        applicableAmmount--;
+//                    }
                     // Calculates the total of units that can be discounted through this offer
                     int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();                    
                     // Removes those units from the quantity
@@ -176,3 +176,4 @@ public class CheckoutSolution {
         }
     }
 }
+
