@@ -1,7 +1,7 @@
 package befaster.solutions.HLO;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +14,8 @@ public class HelloSolutionTest {
     }
 
     @Test
-    public void testHello_whenNameIsWorld_returnsString() {
-        final String name = "World";
-        String result = hello.hello(name);
-        assertTrue(result.contains(name));
+    public void testHello_whenNameIsCraftsman_returnsHelloWorld() {
+        assertEquals("Hello, World!", hello.hello("Craftsman"));
     }
     
     @Test
@@ -26,3 +24,4 @@ public class HelloSolutionTest {
     }
 
 }
+

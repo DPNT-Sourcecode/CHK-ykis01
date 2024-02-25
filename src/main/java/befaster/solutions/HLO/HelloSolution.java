@@ -9,6 +9,7 @@ public class HelloSolution {
         if (name == null ) {
             throw new IllegalArgumentException("The value null is not a valid name");
         }
-        return "Hello, " + name + "!";
+        return "Hello, World!";
     }
 }
+
