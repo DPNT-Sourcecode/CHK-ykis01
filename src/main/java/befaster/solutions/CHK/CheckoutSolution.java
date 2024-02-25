@@ -1,6 +1,5 @@
 package befaster.solutions.CHK;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -63,7 +62,7 @@ public class CheckoutSolution {
             products.compute(sku, (k, v) -> v == null ? 1 : v + 1);
         }
         
-        // Sum based on their quantity
+        // Sum products based on their quantity
         int total = 0;
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
             Character sku = productQuantity.getKey();
@@ -79,7 +78,11 @@ public class CheckoutSolution {
             }
             
             // If it has special pricing, then handle it accordingly
-            
+            // First calculate the special price for the available "bundles"
+            int specialPriceItems = (quantity / productPricing.getSpecialQuantityOffers().getKey()) * productPricing.getSpecialQuantityOffers().getValue();
+            // Then add the extras as regular priced
+            int regularPriceItems = (quantity % productPricing.getSpecialQuantityOffers().getKey()) * productPricing.getRegularPrice();
+            total += specialPriceItems + regularPriceItems;
         }
         
         return total;
@@ -113,5 +116,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
