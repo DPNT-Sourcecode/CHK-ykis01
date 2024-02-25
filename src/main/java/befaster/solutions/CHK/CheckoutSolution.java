@@ -3,8 +3,7 @@ package befaster.solutions.CHK;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import befaster.runner.SolutionNotImplementedException;
-import befaster.solutions.CHK.CheckoutSolution.PricingInfo;
+import java.util.Map.Entry;
 
 /*
     CHK_R1
@@ -44,8 +43,8 @@ public class CheckoutSolution {
     
     public CheckoutSolution() {
         this.inventory = new HashMap<>();
-        inventory.put('A', new PricingInfo(50, Map.of(3, 130)));
-        inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
+        inventory.put('A', new PricingInfo(50, Map.entry(3, 130)));
+        inventory.put('B', new PricingInfo(30, Map.entry(2, 45)));
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
     }
@@ -74,13 +73,12 @@ public class CheckoutSolution {
             PricingInfo productPricing = inventory.get(sku);
             
             // If it doesn't have any special offers, then use the regular pricing
-            if (productPricing.getSpecialQuantityOffers().isEmpty()) {
+            if (productPricing.getSpecialQuantityOffers() == null) {
                 total += quantity * productPricing.getRegularPrice();
                 continue;
             }
             
             // If it has special pricing, then handle it accordingly
-            
             
         }
         
@@ -89,30 +87,31 @@ public class CheckoutSolution {
     
     class PricingInfo {
         private final int regularPrice;
-        private final Map<Integer, Integer> specialQuantityOffers;
+        private final Entry<Integer, Integer> specialQuantityOffer;
         
         PricingInfo(int regularPrice) {
             this.regularPrice = regularPrice;
-            this.specialQuantityOffers = Collections.emptyMap();
+            this.specialQuantityOffer = null;
         }
         
-        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers) {
+        PricingInfo(int regularPrice, Entry<Integer, Integer> specialQuantityOffers) {
             this.regularPrice = regularPrice;
-            this.specialQuantityOffers = specialQuantityOffers;
+            this.specialQuantityOffer = specialQuantityOffers;
         }
 
         public int getRegularPrice() {
             return regularPrice;
         }
 
-        public Map<Integer, Integer> getSpecialQuantityOffers() {
-            return specialQuantityOffers;
+        public Entry<Integer, Integer> getSpecialQuantityOffers() {
+            return specialQuantityOffer;
         }
 
         @Override
         public String toString() {
-            return "PricingInfo [regularPrice=" + regularPrice + ", specialQuantityOffers=" + specialQuantityOffers + "]";
+            return "PricingInfo [regularPrice=" + regularPrice + ", specialQuantityOffers=" + specialQuantityOffer + "]";
         }
     }
 }
+
 
