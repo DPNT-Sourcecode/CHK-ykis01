@@ -125,10 +125,18 @@ public class CheckoutSolution {
     class FreeProductDiscount {
         private char discountedSku;
         private int discountedUnits;
+        private int minimumQuantity;
         
         FreeProductDiscount(int discountedUnits, char discountedSku) {
             this.discountedSku = discountedSku;
             this.discountedUnits = discountedUnits;
+            this.minimumQuantity = 0;
+        }
+        
+        FreeProductDiscount(int discountedUnits, char discountedSku, int minimumQuantity) {
+            this.discountedSku = discountedSku;
+            this.discountedUnits = discountedUnits;
+            this.minimumQuantity = minimumQuantity;
         }
 
         public char getDiscountedSku() {
@@ -140,3 +148,4 @@ public class CheckoutSolution {
         }
     }
 }
+
