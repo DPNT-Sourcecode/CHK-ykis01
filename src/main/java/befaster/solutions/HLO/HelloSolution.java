@@ -1,11 +1,10 @@
 package befaster.solutions.HLO;
 
 import java.util.Objects;
-import befaster.runner.SolutionNotImplementedException;
 
 public class HelloSolution {
     public String hello(String friendName) {
-        throw new SolutionNotImplementedException();
+        return sayHello(friendName);
     }
     
     private String sayHello(String name) {
@@ -13,4 +12,5 @@ public class HelloSolution {
         return "Hello, " + name + "!";
     }
 }
+
 
