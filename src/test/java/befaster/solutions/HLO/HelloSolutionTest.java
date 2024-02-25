@@ -14,14 +14,16 @@ public class HelloSolutionTest {
     }
 
     @Test
-    public void testHello_whenNameIsCraftsman_returnsHelloWorld() {
-        assertEquals("Hello, World!", hello.hello("Craftsman"));
+    public void testHello_whenNameIsCraftsman_returnsString() {
+        final String name = "Craftsman";
+        assertEquals("Hello, " + name + "!", hello.hello("Craftsman"));
     }
-    
+
     @Test
     public void testHello_whenNameIsNull_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> hello.hello(null));
     }
 
 }
+
 
