@@ -3,6 +3,7 @@ package befaster.solutions.CHK;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 public class CheckoutSolution {
@@ -50,8 +51,13 @@ public class CheckoutSolution {
                 continue;
             }
 
-            // If it has special pricing, then handle it accordingly
-
+            // Iterate each of the special offers and apply them, from the best to the worst
+            for (Entry<Integer, Integer> offer : productPricing.getSpecialQuantityOffers().entrySet()) {
+                // Try to apply the offer to most of the available quantity
+                total += (quantity / offer.getKey()) * offer.getValue();
+                // save the rest to be evaluated next
+                quantity = quantity % offer.getKey();
+            }
         }
 
         return total;
@@ -86,5 +92,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
