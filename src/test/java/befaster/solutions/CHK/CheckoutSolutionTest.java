@@ -77,5 +77,23 @@ public class CheckoutSolutionTest {
         assertEquals(80, checkout.checkout("EE"));
     }
     
+    // Failed tests
+
+    @Test
+    public void CHK_R2_012() {
+        assertEquals(155, checkout.checkout("ABCDE"));
+    }
+    
+    @Test
+    public void CHK_R2_026() {
+        assertEquals(160, checkout.checkout("EEEEBB"));
+    }
+    
+    @Test
+    public void CHK_R2_027() {
+        assertEquals(160, checkout.checkout("BEBEEE"));
+    }
+    
 }
+
 
