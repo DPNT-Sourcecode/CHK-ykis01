@@ -60,19 +60,7 @@ public class CheckoutSolution {
                         applicableAmmount--;
                     }
                     // Calculates the total of units that can be discounted through this offer
-                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();
-                    
-                    // HACK
-                    
-                    int currentStock = products.get(discount.getDiscountedSku());
-                    int newStock = currentStock - totalDiscountedUnits;
-                    // If it drops bellow the min then skip one discount
-                    if (newStock < discount.getMinimumQuantity()) {
-                        newStock = newStock + discount.getMinimumQuantity();
-                    }
-                    
-                    // HACK
-                    
+                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();                    
                     // Removes those units from the quantity
                     products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                     // save the rest to be evaluated next
@@ -175,5 +163,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
