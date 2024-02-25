@@ -84,7 +84,7 @@ public class CheckoutSolution {
         for (CustomBundle customBundle : customBundles) {
             List<Integer> prices = new ArrayList<>();
             for(Character sku : customBundle.getSkus()) {
-                Integer quantity = products.get(sku);
+                Integer quantity = products.remove(sku);
                 for (int i = 0; i < quantity; i++) {
                     prices.add(inventory.get(sku).getRegularPrice());
                 }
@@ -231,6 +231,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
