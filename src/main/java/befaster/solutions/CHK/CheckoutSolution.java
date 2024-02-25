@@ -49,6 +49,11 @@ public class CheckoutSolution {
     }
     
     public Integer checkout(String skus) {
+        // Validate if the skus aren't null
+        if (skus == null) {
+            return -1;
+        }
+        
         // Validate if there aren't any illegal products
         for (char sku : skus.toCharArray()) {
             if (!inventory.containsKey(sku)) {
@@ -116,6 +121,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
