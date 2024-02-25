@@ -97,4 +97,3 @@ public class ListUtils {
         return new Partition<>(list, size);
     }
 }
-

@@ -86,9 +86,15 @@ public class CheckoutSolution {
             List<Integer> prices = new ArrayList<>();
             for(Character sku : customBundle.getSkus()) {
                 Integer quantity = products.remove(sku);
+                if (quantity == null) {
+                    continue;
+                }
                 for (int i = 0; i < quantity; i++) {
                     prices.add(inventory.get(sku).getRegularPrice());
                 }
+            }
+            if (prices.isEmpty()) {
+                continue;
             }
             Collections.sort(prices, Collections.reverseOrder());
             List<List<Integer>> particionedList = ListUtils.partition(prices, customBundle.getMinQuantity());
@@ -241,8 +247,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
-
