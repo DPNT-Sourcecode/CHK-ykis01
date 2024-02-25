@@ -41,8 +41,8 @@ public class CheckoutSolution {
         inventory.put('V', new PricingInfo(50, Map.of(2, 90, 3, 130)));
         inventory.put('W', new PricingInfo(20));
         inventory.put('X', new PricingInfo(17));
-        inventory.put('Y', new PricingInfo(10));
-        inventory.put('Z', new PricingInfo(50));
+        inventory.put('Y', new PricingInfo(20));
+        inventory.put('Z', new PricingInfo(21));
         
         this.customBundles = Collections.singletonList(new CustomBundle(Set.of('S', 'T', 'X', 'Y', 'Z'), 3, 45));
     }
@@ -247,4 +247,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
