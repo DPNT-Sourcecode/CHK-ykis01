@@ -15,7 +15,7 @@ public class CheckoutSolution {
         inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
-        inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, 'B')));
+        inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'B'))));
     }
 
     public Integer checkout(String skus) {
@@ -46,11 +46,10 @@ public class CheckoutSolution {
             PricingInfo productPricing = inventory.get(sku);
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
-            for (Entry<Integer, Character> offer : productPricing.getSpecialBundleOffers().entrySet()) {
-                // Check how many times this offer can be applied
-//                int applicableAmmount = (quantity / offer.getKey()) * offer.getValue();
+            for (Entry<Integer, FreeProductDiscount> offer : productPricing.getSpecialBundleOffers().entrySet()) {
+                int totalDiscountedUnits = (quantity / offer.getKey()) * offer.getValue().getDiscountedUnits();
                 // Removes one from the quantity
-                products.computeIfPresent(offer.getValue(), (k, v) -> v - 1);
+                products.computeIfPresent(offer.getValue().getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                 // save the rest to be evaluated next
                 quantity = quantity % offer.getKey();
             }
@@ -84,7 +83,7 @@ public class CheckoutSolution {
     class PricingInfo {
         private final int regularPrice;
         private final Map<Integer, Integer> specialQuantityOffer;
-        private final Map<Integer, Character> specialBundleOffer;
+        private final Map<Integer, FreeProductDiscount> specialBundleOffer;
 
         PricingInfo(int regularPrice) {
             this.regularPrice = regularPrice;
@@ -100,7 +99,7 @@ public class CheckoutSolution {
             this.specialBundleOffer = Collections.emptyMap();
         }
         
-        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers, Map<Integer, Character> specialBundleOffer) {
+        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers, Map<Integer, FreeProductDiscount> specialBundleOffer) {
             this.regularPrice = regularPrice;
             this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
             this.specialQuantityOffer.putAll(specialQuantityOffers);
@@ -116,27 +115,28 @@ public class CheckoutSolution {
             return specialQuantityOffer;
         }
         
-        public Map<Integer, Character> getSpecialBundleOffers() {
+        public Map<Integer, FreeProductDiscount> getSpecialBundleOffers() {
             return specialBundleOffer;
         }
     }
     
-//    class FreeProductDiscount {
-//        private char discountedSku;
-//        private int discountedUnits;
-//        
-//        FreeProductDiscount(char discountedSku, int discoountedUnits) {
-//            this.discountedSku = discountedSku;
-//            this.discountedUnits = discoountedUnits;
-//        }
-//
-//        public char getDiscountedSku() {
-//            return discountedSku;
-//        }
-//
-//        public int getDiscoountedUnits() {
-//            return discountedUnits;
-//        }
-//    }
+    class FreeProductDiscount {
+        private char discountedSku;
+        private int discountedUnits;
+        
+        FreeProductDiscount(int discountedUnits, char discountedSku) {
+            this.discountedSku = discountedSku;
+            this.discountedUnits = discountedUnits;
+        }
+
+        public char getDiscountedSku() {
+            return discountedSku;
+        }
+
+        public int getDiscountedUnits() {
+            return discountedUnits;
+        }
+    }
 }
+
 
