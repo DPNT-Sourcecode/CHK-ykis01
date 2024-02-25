@@ -18,7 +18,26 @@ public class CheckoutSolution {
         inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'B'))));
 //        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Collections.emptyMap(), Map.of(2, new RestrictedFreeProductDiscount(1, 'F', 3))));
         inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Map.of(3, new FreeProductDiscount(1, 'F'))));
-
+        inventory.put('G', new PricingInfo(20));
+        inventory.put('H', new PricingInfo(10, Map.of(5, 45, 10, 80)));
+        inventory.put('I', new PricingInfo(35));
+        inventory.put('J', new PricingInfo(60));
+        inventory.put('K', new PricingInfo(80, Map.of(2, 150)));
+        inventory.put('L', new PricingInfo(90));
+        inventory.put('M', new PricingInfo(15));
+        inventory.put('N', new PricingInfo(40, Collections.emptyMap(), Map.of(3, new FreeProductDiscount(1, 'M'))));
+        inventory.put('O', new PricingInfo(10));
+        inventory.put('P', new PricingInfo(50, Map.of(5, 200)));
+        inventory.put('Q', new PricingInfo(30, Map.of(3, 80)));
+        inventory.put('R', new PricingInfo(50, Collections.emptyMap(), Map.of(3, new FreeProductDiscount(1, 'Q'))));
+        inventory.put('S', new PricingInfo(30));
+        inventory.put('T', new PricingInfo(20));
+        inventory.put('U', new PricingInfo(40, Collections.emptyMap(), Map.of(4, new FreeProductDiscount(1, 'U'))));
+        inventory.put('V', new PricingInfo(50, Map.of(2, 90, 3, 130)));
+        inventory.put('W', new PricingInfo(20));
+        inventory.put('X', new PricingInfo(90));
+        inventory.put('Y', new PricingInfo(10));
+        inventory.put('Z', new PricingInfo(50));
     }
 
     public Integer checkout(String skus) {
@@ -231,6 +250,7 @@ public class CheckoutSolution {
 //        }
 //    }
 }
+
 
 
 

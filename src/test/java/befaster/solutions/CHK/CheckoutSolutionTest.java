@@ -24,7 +24,7 @@ public class CheckoutSolutionTest {
 
     @Test
     public void testCheckout_withImpossibleProduct_returnsMinusOne() {
-        assertEquals(-1, checkout.checkout("X"));
+        assertEquals(-1, checkout.checkout("0"));
     }
 
     @Test
@@ -118,3 +118,4 @@ public class CheckoutSolutionTest {
         assertEquals(40, checkout.checkout("FFFFFF"));
     }
 }
+
