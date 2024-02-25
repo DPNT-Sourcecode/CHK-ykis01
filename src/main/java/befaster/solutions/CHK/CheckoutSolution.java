@@ -16,7 +16,7 @@ public class CheckoutSolution {
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
         inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'B'))));
-        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'F', 3))));
+        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Collections.emptyMap(), Map.of(2, new RestrictedFreeProductDiscount(1, 'F', 3))));
     }
 
     public Integer checkout(String skus) {
@@ -60,11 +60,12 @@ public class CheckoutSolution {
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
             for (Entry<Integer, RestrictedFreeProductDiscount> entry : originalProductPricing.getRestrictedBundleOffers().entrySet()) {
-                // Quick rename to make things easier
-                int triggeringQuantity = entry.getKey();
                 RestrictedFreeProductDiscount discount = entry.getValue();
                 if (originalSkuQuantity >= discount.getMinimumQuantity()) {
-                    
+                    int applicableAmmount = originalSkuQuantity / discount.getMinimumQuantity();
+                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();
+                    products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
+                    originalSkuQuantity = originalSkuQuantity % discount.getMinimumQuantity();
                 }
             }
         }
@@ -228,3 +229,4 @@ public class CheckoutSolution {
         }
     }
 }
+
