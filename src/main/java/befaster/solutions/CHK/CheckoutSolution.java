@@ -48,8 +48,8 @@ public class CheckoutSolution {
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
             for (Entry<Integer, FreeProductDiscount> offer : productPricing.getSpecialBundleOffers().entrySet()) {
-                
-                if (products.getOrDefault(offer.getValue().getDiscountedSku(), 0) >= offer.getValue().getMinimumQuantity()) {
+                // Check if we have the minimum quantity to apply this discount
+                if (products.getOrDefault(offer.getValue().getDiscountedSku(), 1) >= offer.getValue().getMinimumQuantity()) {
                     // Calculates the total of units that can be discounted through this offer
                     int totalDiscountedUnits = (quantity / offer.getKey()) * offer.getValue().getDiscountedUnits();
                     // Removes those units from the quantity
@@ -57,10 +57,6 @@ public class CheckoutSolution {
                     // save the rest to be evaluated next
                     quantity = quantity % offer.getKey(); 
                 }
-                
-                
-                
-
             }
         }
 
@@ -136,7 +132,7 @@ public class CheckoutSolution {
         FreeProductDiscount(int discountedUnits, char discountedSku) {
             this.discountedSku = discountedSku;
             this.discountedUnits = discountedUnits;
-            this.minimumQuantity = 0;
+            this.minimumQuantity = 1;
         }
         
         FreeProductDiscount(int discountedUnits, char discountedSku, int minimumQuantity) {
@@ -158,5 +154,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
