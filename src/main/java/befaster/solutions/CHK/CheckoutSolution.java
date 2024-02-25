@@ -1,5 +1,7 @@
 package befaster.solutions.CHK;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import befaster.runner.SolutionNotImplementedException;
 
@@ -44,12 +46,32 @@ public class CheckoutSolution {
     }
     
     class PricingInfo {
-        private int regularPrice;
-        private Map<Integer, Integer> specialQuantityOffers;
+        private final int regularPrice;
+        private final Map<Integer, Integer> specialQuantityOffers;
         
         PricingInfo(int regularPrice) {
-            
+            this.regularPrice = regularPrice;
+            this.specialQuantityOffers = Collections.emptyMap();
+        }
+        
+        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers) {
+            this.regularPrice = regularPrice;
+            this.specialQuantityOffers = specialQuantityOffers;
+        }
+
+        public int getRegularPrice() {
+            return regularPrice;
+        }
+
+        public Map<Integer, Integer> getSpecialQuantityOffers() {
+            return specialQuantityOffers;
+        }
+
+        @Override
+        public String toString() {
+            return "PricingInfo [regularPrice=" + regularPrice + ", specialQuantityOffers=" + specialQuantityOffers + "]";
         }
     }
 }
+
 
