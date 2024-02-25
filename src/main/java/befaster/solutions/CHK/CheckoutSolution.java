@@ -59,11 +59,13 @@ public class CheckoutSolution {
             PricingInfo originalProductPricing = inventory.get(originalSku);
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
-            for (Entry<Integer, FreeProductDiscount> entry : originalProductPricing.getRestrictedBundleOffers().entrySet()) {
+            for (Entry<Integer, RestrictedFreeProductDiscount> entry : originalProductPricing.getRestrictedBundleOffers().entrySet()) {
                 // Quick rename to make things easier
                 int triggeringQuantity = entry.getKey();
-                FreeProductDiscount discount = entry.getValue();
-                
+                RestrictedFreeProductDiscount discount = entry.getValue();
+                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
+                    
+                }
             }
         }
 
@@ -226,7 +228,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
