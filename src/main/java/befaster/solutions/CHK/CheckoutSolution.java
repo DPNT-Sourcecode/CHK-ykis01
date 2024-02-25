@@ -70,15 +70,21 @@ public class CheckoutSolution {
             Character sku = productQuantity.getKey();
             Integer quantity = productQuantity.getValue();
             
+            // Get product pricing
             PricingInfo productPricing = inventory.get(sku);
+            
+            // If it doesn't have any special offers, then use the regular pricing
             if (productPricing.getSpecialQuantityOffers().isEmpty()) {
-                total +=
+                total += quantity * productPricing.getRegularPrice();
+                continue;
             }
+            
+            // If it has special pricing, then handle it accordingly
+            
             
         }
         
-        
-        throw new SolutionNotImplementedException();
+        return total;
     }
     
     class PricingInfo {
@@ -109,3 +115,4 @@ public class CheckoutSolution {
         }
     }
 }
+
