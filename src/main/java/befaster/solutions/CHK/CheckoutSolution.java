@@ -3,6 +3,7 @@ package befaster.solutions.CHK;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -80,9 +81,18 @@ public class CheckoutSolution {
         int total = 0;
         
         // Handle custom bundles
-        
-        Map<Boolean, List<Integer>> groups = intList.stream().collect(Collectors.partitioningBy(s -> s > 6));
-        List<List<Integer>> subSets = new ArrayList<List<Integer>>(groups.values());
+        for (CustomBundle customBundle : customBundles) {
+            List<Integer> prices = new ArrayList<>();
+            for(Character sku : customBundle.getSkus()) {
+                Integer quantity = products.get(sku);
+                for (int i = 0; i < quantity; i++) {
+                    prices.add(inventory.get(sku).getRegularPrice());
+                }
+            }
+            Collections.sort(prices, Collections.reverseOrder());
+            
+        }
+
         
         
 
@@ -221,5 +231,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
