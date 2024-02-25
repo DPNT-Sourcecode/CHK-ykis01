@@ -109,8 +109,13 @@ public class CheckoutSolutionTest {
     }
     
     @Test
-    public void FFFFFF() {
+    public void CHK_R3_042() {
         assertEquals(40, checkout.checkout("FFFFFF"));
     }
     
+    @Test
+    public void CHK_R3_043() {
+        assertEquals(40, checkout.checkout("FFFFFF"));
+    }
 }
+
