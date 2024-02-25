@@ -47,15 +47,19 @@ public class CheckoutSolution {
             PricingInfo productPricing = inventory.get(sku);
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
-            for (Entry<Integer, FreeProductDiscount> offer : productPricing.getSpecialBundleOffers().entrySet()) {
+            for (Entry<Integer, FreeProductDiscount> entry : productPricing.getSpecialBundleOffers().entrySet()) {
+                // Quick rename to make things easier
+                int triggeringQuantity = entry.getKey();
+                FreeProductDiscount discount = entry.getValue();
+
                 // Check if we have the minimum quantity to apply this discount
-                if (products.getOrDefault(offer.getValue().getDiscountedSku(), 1) >= offer.getValue().getMinimumQuantity()) {
+                if (products.getOrDefault(discount.getDiscountedSku(), 0) >= discount.getMinimumQuantity()) {
                     // Calculates the total of units that can be discounted through this offer
-                    int totalDiscountedUnits = (quantity / offer.getKey()) * offer.getValue().getDiscountedUnits();
+                    int totalDiscountedUnits = (quantity / triggeringQuantity) * discount.getDiscountedUnits();
                     // Removes those units from the quantity
-                    products.computeIfPresent(offer.getValue().getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
+                    products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                     // save the rest to be evaluated next
-                    quantity = quantity % offer.getKey(); 
+                    quantity = quantity % triggeringQuantity;
                 }
             }
         }
@@ -154,6 +158,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
