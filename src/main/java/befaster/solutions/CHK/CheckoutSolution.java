@@ -16,7 +16,7 @@ public class CheckoutSolution {
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
         inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'B'))));
-        inventory.put('F', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'F'))));
+        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'F'))));
     }
 
     public Integer checkout(String skus) {
@@ -39,8 +39,6 @@ public class CheckoutSolution {
         }
         
         // Build any bundles there might exist
-        Map<Character, Integer> bundledProducts = new HashMap<>();
-        bundledProducts.putAll(products);
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
             Character sku = productQuantity.getKey();
             Integer quantity = productQuantity.getValue();
@@ -53,13 +51,12 @@ public class CheckoutSolution {
                 // Calculates the total of units that can be discounted through this offer
                 int totalDiscountedUnits = (quantity / offer.getKey()) * offer.getValue().getDiscountedUnits();
                 // Removes those units from the quantity
-                bundledProducts.computeIfPresent(offer.getValue().getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
+                products.computeIfPresent(offer.getValue().getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                 // save the rest to be evaluated next
                 quantity = quantity % offer.getKey();
             }
             
         }
-        products = bundledProducts;
 
         // Sum products based on their quantity
         int total = 0;
@@ -143,6 +140,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
