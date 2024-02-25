@@ -13,26 +13,20 @@ public class CheckoutSolutionTest {
     }
 
     /**
-     *     +------+-------+----------------+
-    | Item | Price | Special offers |
-    +------+-------+----------------+
-    | A    | 50    | 3A for 130     |
-    | B    | 30    | 2B for 45      |
-    | C    | 20    |                |
-    | D    | 15    |                |
-    +------+-------+----------------+
+     * +------+-------+----------------+ | Item | Price | Special offers | +------+-------+----------------+ | A | 50 | 3A for 130 | | B |
+     * 30 | 2B for 45 | | C | 20 | | | D | 15 | | +------+-------+----------------+
      */
-    
+
     @Test
     public void testCheckout_withoutProducts_returnsZero() {
         assertEquals(0, checkout.checkout(""));
     }
-    
+
     @Test
     public void testCheckout_withNull_returnsMinusOne() {
         assertEquals(-1, checkout.checkout(null));
     }
-    
+
     @Test
     public void testCheckout_withImpossibleProduct_returnsMinusOne() {
         assertEquals(-1, checkout.checkout("X"));
@@ -42,15 +36,30 @@ public class CheckoutSolutionTest {
     public void testCheckout_withoutOneA_returns50() {
         assertEquals(50, checkout.checkout("A"));
     }
-    
+
     @Test
     public void testCheckout_withoutThreeA_returns130() {
         assertEquals(130, checkout.checkout("AAA"));
     }
-    
+
     @Test
     public void testCheckout_withoutFourA_returns180() {
         assertEquals(180, checkout.checkout("AAAA"));
     }
 
+    @Test
+    public void testCheckout_withoutFiveA_returns200() {
+        assertEquals(200, checkout.checkout("AAAAA"));
+    }
+
+    @Test
+    public void testCheckout_withoutEightA_returns330() {
+        assertEquals(330, checkout.checkout("AAAAAAAA"));
+    }
+
+    @Test
+    public void testCheckout_withoutNineA_returns380() {
+        assertEquals(380, checkout.checkout("AAAAAAAAA"));
+    }
 }
+
