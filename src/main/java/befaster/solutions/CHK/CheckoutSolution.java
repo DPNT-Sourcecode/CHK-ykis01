@@ -124,14 +124,14 @@ public class CheckoutSolution {
         private final int regularPrice;
         private final Map<Integer, Integer> specialQuantityOffer;
         private final Map<Integer, FreeProductDiscount> specialBundleOffer;
-        private final Map<Integer, RestrictedFreeProductDiscount> restrictedBundleOffer;
+//        private final Map<Integer, RestrictedFreeProductDiscount> restrictedBundleOffer;
 
 
         PricingInfo(int regularPrice) {
             this.regularPrice = regularPrice;
             this.specialQuantityOffer = Collections.emptyMap();
             this.specialBundleOffer = Collections.emptyMap();
-            this.restrictedBundleOffer = Collections.emptyMap();
+//            this.restrictedBundleOffer = Collections.emptyMap();
         }
 
         PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers) {
@@ -139,7 +139,7 @@ public class CheckoutSolution {
             this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
             this.specialQuantityOffer.putAll(specialQuantityOffers);
             this.specialBundleOffer = Collections.emptyMap();
-            this.restrictedBundleOffer = Collections.emptyMap();
+//            this.restrictedBundleOffer = Collections.emptyMap();
 
         }
         
@@ -149,19 +149,19 @@ public class CheckoutSolution {
             this.specialQuantityOffer.putAll(specialQuantityOffers);
             this.specialBundleOffer = new TreeMap<>(Collections.reverseOrder());
             this.specialBundleOffer.putAll(specialBundleOffer);
-            this.restrictedBundleOffer = Collections.emptyMap();
+//            this.restrictedBundleOffer = Collections.emptyMap();
         }
         
-        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers, Map<Integer, FreeProductDiscount> specialBundleOffer,
-                Map<Integer, RestrictedFreeProductDiscount> restrictedBundleOffer) {
-            this.regularPrice = regularPrice;
-            this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
-            this.specialQuantityOffer.putAll(specialQuantityOffers);
-            this.specialBundleOffer = new TreeMap<>(Collections.reverseOrder());
-            this.specialBundleOffer.putAll(specialBundleOffer);
-            this.restrictedBundleOffer = new TreeMap<>(Collections.reverseOrder());
-            this.restrictedBundleOffer.putAll(restrictedBundleOffer);
-        }
+//        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers, Map<Integer, FreeProductDiscount> specialBundleOffer,
+//                Map<Integer, RestrictedFreeProductDiscount> restrictedBundleOffer) {
+//            this.regularPrice = regularPrice;
+//            this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
+//            this.specialQuantityOffer.putAll(specialQuantityOffers);
+//            this.specialBundleOffer = new TreeMap<>(Collections.reverseOrder());
+//            this.specialBundleOffer.putAll(specialBundleOffer);
+//            this.restrictedBundleOffer = new TreeMap<>(Collections.reverseOrder());
+//            this.restrictedBundleOffer.putAll(restrictedBundleOffer);
+//        }
 
         public int getRegularPrice() {
             return regularPrice;
@@ -174,9 +174,9 @@ public class CheckoutSolution {
         public Map<Integer, FreeProductDiscount> getSpecialBundleOffers() {
             return specialBundleOffer;
         }
-        public Map<Integer, RestrictedFreeProductDiscount> getRestrictedBundleOffers() {
-            return restrictedBundleOffer;
-        }
+//        public Map<Integer, RestrictedFreeProductDiscount> getRestrictedBundleOffers() {
+//            return restrictedBundleOffer;
+//        }
     }
     
     class FreeProductDiscount {
@@ -202,34 +202,35 @@ public class CheckoutSolution {
         }
     }
     
-    class RestrictedFreeProductDiscount {
-        private char discountedSku;
-        private int discountedUnits;
-        private int minimumQuantity;
-        
-        RestrictedFreeProductDiscount(int discountedUnits, char discountedSku) {
-            this.discountedSku = discountedSku;
-            this.discountedUnits = discountedUnits;
-        }
-        
-        RestrictedFreeProductDiscount(int discountedUnits, char discountedSku, int minimumQuantity) {
-            this.discountedSku = discountedSku;
-            this.discountedUnits = discountedUnits;
-            this.minimumQuantity = minimumQuantity;
-        }
-
-        public char getDiscountedSku() {
-            return discountedSku;
-        }
-
-        public int getDiscountedUnits() {
-            return discountedUnits;
-        }
-        
-        public int getMinimumQuantity() {
-            return minimumQuantity;
-        }
-    }
+//    class RestrictedFreeProductDiscount {
+//        private char discountedSku;
+//        private int discountedUnits;
+//        private int minimumQuantity;
+//        
+//        RestrictedFreeProductDiscount(int discountedUnits, char discountedSku) {
+//            this.discountedSku = discountedSku;
+//            this.discountedUnits = discountedUnits;
+//        }
+//        
+//        RestrictedFreeProductDiscount(int discountedUnits, char discountedSku, int minimumQuantity) {
+//            this.discountedSku = discountedSku;
+//            this.discountedUnits = discountedUnits;
+//            this.minimumQuantity = minimumQuantity;
+//        }
+//
+//        public char getDiscountedSku() {
+//            return discountedSku;
+//        }
+//
+//        public int getDiscountedUnits() {
+//            return discountedUnits;
+//        }
+//        
+//        public int getMinimumQuantity() {
+//            return minimumQuantity;
+//        }
+//    }
 }
+
 
 
