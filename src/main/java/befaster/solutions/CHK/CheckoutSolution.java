@@ -44,10 +44,10 @@ public class CheckoutSolution {
             Integer originalSkuQuantity = productQuantity.getValue();
             
             // Get product pricing
-            PricingInfo productPricing = inventory.get(originalSku);
+            PricingInfo originalProductPricing = inventory.get(originalSku);
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
-            for (Entry<Integer, FreeProductDiscount> entry : productPricing.getSpecialBundleOffers().entrySet()) {
+            for (Entry<Integer, FreeProductDiscount> entry : originalProductPricing.getSpecialBundleOffers().entrySet()) {
                 // Quick rename to make things easier
                 int triggeringQuantity = entry.getKey();
                 FreeProductDiscount discount = entry.getValue();
@@ -163,6 +163,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
