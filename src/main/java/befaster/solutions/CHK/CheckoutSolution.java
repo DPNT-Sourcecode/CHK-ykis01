@@ -53,9 +53,14 @@ public class CheckoutSolution {
                 FreeProductDiscount discount = entry.getValue();
 
                 // Check if we have the minimum quantity to apply this discount
-                if (products.getOrDefault(discount.getDiscountedSku(), 0) >= discount.getMinimumQuantity()) {
+                if (quantity >= discount.getMinimumQuantity()) {
+                    int applicableAmmount = quantity / triggeringQuantity;
+                    if (quantity % discount.getMinimumQuantity() != 0) {
+                        applicableAmmount--;
+                    }
+
                     // Calculates the total of units that can be discounted through this offer
-                    int totalDiscountedUnits = (quantity / triggeringQuantity) * discount.getDiscountedUnits();
+                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();
                     // Removes those units from the quantity
                     products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                     // save the rest to be evaluated next
@@ -158,6 +163,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
