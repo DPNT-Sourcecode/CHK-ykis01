@@ -2,12 +2,15 @@ package befaster.solutions.CHK;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class CheckoutSolution {
     private Map<Character, PricingInfo> inventory;
+    private List<CustomBundle> customBundles;
 
     public CheckoutSolution() {
         this.inventory = new HashMap<>();
@@ -37,6 +40,8 @@ public class CheckoutSolution {
         inventory.put('X', new PricingInfo(90));
         inventory.put('Y', new PricingInfo(10));
         inventory.put('Z', new PricingInfo(50));
+        
+        this.customBundles = Collections.singletonList(new CustomBundle(Set.of('S', 'T', 'X', 'Y', 'Z'), 3, 45));
     }
 
     public Integer checkout(String skus) {
@@ -181,4 +186,29 @@ public class CheckoutSolution {
             return discountedUnits;
         }
     }
+
+    class CustomBundle {
+        private Set<Character> skus;
+        private int minQuantity;
+        private int price;
+        
+        CustomBundle(Set<Character> skus, int minQuantity, int price) {
+            this.skus = skus;
+            this.minQuantity = minQuantity;
+            this.price = price;
+        }
+
+        public Set<Character> getSkus() {
+            return skus;
+        }
+
+        public int getMinQuantity() {
+            return minQuantity;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+    }
 }
+
