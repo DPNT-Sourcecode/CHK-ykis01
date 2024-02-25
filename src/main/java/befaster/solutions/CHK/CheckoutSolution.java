@@ -40,11 +40,11 @@ public class CheckoutSolution {
         
         // Build any bundles there might exist
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
-            Character sku = productQuantity.getKey();
-            Integer quantity = productQuantity.getValue();
+            Character originalSku = productQuantity.getKey();
+            Integer originalSkuQuantity = productQuantity.getValue();
             
             // Get product pricing
-            PricingInfo productPricing = inventory.get(sku);
+            PricingInfo productPricing = inventory.get(originalSku);
 
             // Iterate each of the bundle offers and apply them, from the best to the worst
             for (Entry<Integer, FreeProductDiscount> entry : productPricing.getSpecialBundleOffers().entrySet()) {
@@ -53,10 +53,10 @@ public class CheckoutSolution {
                 FreeProductDiscount discount = entry.getValue();
 
                 // Check if we have the minimum quantity to apply this discount
-                if (quantity >= discount.getMinimumQuantity()) {
+                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
                     // If the rest is not 0 then it couldn't be properly applicable one time
-                    int applicableAmmount = quantity / triggeringQuantity;
-                    if (quantity % discount.getMinimumQuantity() != 0) {
+                    int applicableAmmount = originalSkuQuantity / triggeringQuantity;
+                    if (originalSkuQuantity % discount.getMinimumQuantity() != 0) {
                         applicableAmmount--;
                     }
                     // Calculates the total of units that can be discounted through this offer
@@ -64,7 +64,7 @@ public class CheckoutSolution {
                     // Removes those units from the quantity
                     products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                     // save the rest to be evaluated next
-                    quantity = quantity % triggeringQuantity;
+                    originalSkuQuantity = originalSkuQuantity % triggeringQuantity;
                 }
             }
         }
@@ -163,3 +163,4 @@ public class CheckoutSolution {
         }
     }
 }
+
