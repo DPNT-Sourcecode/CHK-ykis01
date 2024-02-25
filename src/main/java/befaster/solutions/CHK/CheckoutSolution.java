@@ -55,6 +55,9 @@ public class CheckoutSolution {
         // Build the sum of all the products
         Map<Character, Integer> products = createSkusMap(skus);
         
+        // Initializes the total price
+        int total = 0;
+        
         // Build any regular bundles there might exist
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
             Character originalSku = productQuantity.getKey();
@@ -77,9 +80,7 @@ public class CheckoutSolution {
                 originalSkuQuantity = originalSkuQuantity % triggeringQuantity;
             }
         }
-        
-        int total = 0;
-        
+                
         // Handle custom bundles
         for (CustomBundle customBundle : customBundles) {
             List<Integer> prices = new ArrayList<>();
@@ -90,11 +91,20 @@ public class CheckoutSolution {
                 }
             }
             Collections.sort(prices, Collections.reverseOrder());
-            
+            List<List<Integer>> particionedList = ListUtils.partition(prices, customBundle.getMinQuantity());
+            for (List<Integer> priceParticion : particionedList) {
+                int partitionTotal = 0;
+                for (Integer price : priceParticion) {
+                    partitionTotal += price;
+                }
+                
+                if (priceParticion.size() < customBundle.getMinQuantity() || partitionTotal < customBundle.getPrice()) {
+                    total += partitionTotal;
+                } else {
+                    total += customBundle.getPrice();
+                }
+            }
         }
-
-        
-        
 
         // Sum products based on their quantity
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
@@ -231,6 +241,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
