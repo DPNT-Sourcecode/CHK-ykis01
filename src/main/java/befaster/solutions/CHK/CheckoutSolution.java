@@ -15,6 +15,7 @@ public class CheckoutSolution {
         inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
+        inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, 'E')));
     }
 
     public Integer checkout(String skus) {
@@ -34,6 +35,26 @@ public class CheckoutSolution {
         Map<Character, Integer> products = new HashMap<>();
         for (char sku : skus.toCharArray()) {
             products.compute(sku, (k, v) -> v == null ? 1 : v + 1);
+        }
+        
+        // Build any bundles there might exist
+        for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
+            Character sku = productQuantity.getKey();
+            Integer quantity = productQuantity.getValue();
+            
+            // Get product pricing
+            PricingInfo productPricing = inventory.get(sku);
+
+            // Iterate each of the bundle offers and apply them, from the best to the worst
+            for (Entry<Integer, Character> offer : productPricing.getSpecialBundleOffers().entrySet()) {
+                // Check how many times this offer can be applied
+//                int applicableAmmount = (quantity / offer.getKey()) * offer.getValue();
+                // Removes one from the quantity
+                products.computeIfPresent(offer.getValue(), (k, v) -> v - 1);
+                // save the rest to be evaluated next
+                quantity = quantity % offer.getKey();
+            }
+            
         }
 
         // Sum products based on their quantity
@@ -100,6 +121,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
