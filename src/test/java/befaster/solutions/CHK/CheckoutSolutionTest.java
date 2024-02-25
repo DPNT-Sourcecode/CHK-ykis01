@@ -61,5 +61,11 @@ public class CheckoutSolutionTest {
     public void testCheckout_withoutNineA_returns380() {
         assertEquals(380, checkout.checkout("AAAAAAAAA"));
     }
+    
+    @Test
+    public void testCheckout_2Eget1Bfree_returns80() {
+        assertEquals(80, checkout.checkout("BBE"));
+    }
 }
+
 
