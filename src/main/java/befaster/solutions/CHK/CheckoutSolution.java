@@ -42,7 +42,7 @@ public class CheckoutSolution {
                 FreeProductDiscount discount = entry.getValue();
 
                 // Check if we have the minimum quantity to apply this discount
-                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
+//                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
                     // If the rest is not 0 then it couldn't be properly applicable one time
                     int applicableAmmount = originalSkuQuantity / triggeringQuantity;
 //                    if (originalSkuQuantity % discount.getMinimumQuantity() != 0) {
@@ -54,7 +54,7 @@ public class CheckoutSolution {
                     products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
                     // save the rest to be evaluated next
                     originalSkuQuantity = originalSkuQuantity % triggeringQuantity;
-                }
+//                }
             }
         }
 
@@ -149,18 +149,15 @@ public class CheckoutSolution {
     class FreeProductDiscount {
         private char discountedSku;
         private int discountedUnits;
-        private int minimumQuantity;
         
         FreeProductDiscount(int discountedUnits, char discountedSku) {
             this.discountedSku = discountedSku;
             this.discountedUnits = discountedUnits;
-            this.minimumQuantity = 1;
         }
         
         FreeProductDiscount(int discountedUnits, char discountedSku, int minimumQuantity) {
             this.discountedSku = discountedSku;
             this.discountedUnits = discountedUnits;
-            this.minimumQuantity = minimumQuantity;
         }
 
         public char getDiscountedSku() {
@@ -170,10 +167,7 @@ public class CheckoutSolution {
         public int getDiscountedUnits() {
             return discountedUnits;
         }
-        
-        public int getMinimumQuantity() {
-            return minimumQuantity;
-        }
     }
 }
+
 
