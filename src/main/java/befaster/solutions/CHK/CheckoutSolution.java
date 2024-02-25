@@ -16,7 +16,9 @@ public class CheckoutSolution {
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
         inventory.put('E', new PricingInfo(40, Collections.emptyMap(), Map.of(2, new FreeProductDiscount(1, 'B'))));
-        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Collections.emptyMap(), Map.of(2, new RestrictedFreeProductDiscount(1, 'F', 3))));
+//        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Collections.emptyMap(), Map.of(2, new RestrictedFreeProductDiscount(1, 'F', 3))));
+        inventory.put('F', new PricingInfo(10, Collections.emptyMap(), Map.of(3, new FreeProductDiscount(1, 'F'))));
+
     }
 
     public Integer checkout(String skus) {
@@ -50,25 +52,25 @@ public class CheckoutSolution {
             }
         }
         
-        // Build any restricted bundles there might exist
-        for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
-            Character originalSku = productQuantity.getKey();
-            Integer originalSkuQuantity = productQuantity.getValue();
-            
-            // Get product pricing
-            PricingInfo originalProductPricing = inventory.get(originalSku);
-
-            // Iterate each of the bundle offers and apply them, from the best to the worst
-            for (Entry<Integer, RestrictedFreeProductDiscount> entry : originalProductPricing.getRestrictedBundleOffers().entrySet()) {
-                RestrictedFreeProductDiscount discount = entry.getValue();
-                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
-                    int applicableAmmount = originalSkuQuantity / discount.getMinimumQuantity();
-                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();
-                    products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
-                    originalSkuQuantity = originalSkuQuantity % discount.getMinimumQuantity();
-                }
-            }
-        }
+//        // Build any restricted bundles there might exist
+//        for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
+//            Character originalSku = productQuantity.getKey();
+//            Integer originalSkuQuantity = productQuantity.getValue();
+//            
+//            // Get product pricing
+//            PricingInfo originalProductPricing = inventory.get(originalSku);
+//
+//            // Iterate each of the bundle offers and apply them, from the best to the worst
+//            for (Entry<Integer, RestrictedFreeProductDiscount> entry : originalProductPricing.getRestrictedBundleOffers().entrySet()) {
+//                RestrictedFreeProductDiscount discount = entry.getValue();
+//                if (originalSkuQuantity >= discount.getMinimumQuantity()) {
+//                    int applicableAmmount = originalSkuQuantity / discount.getMinimumQuantity();
+//                    int totalDiscountedUnits = applicableAmmount * discount.getDiscountedUnits();
+//                    products.computeIfPresent(discount.getDiscountedSku(), (k, v) -> v - totalDiscountedUnits);
+//                    originalSkuQuantity = originalSkuQuantity % discount.getMinimumQuantity();
+//                }
+//            }
+//        }
 
         // Sum products based on their quantity
         int total = 0;
@@ -229,4 +231,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
