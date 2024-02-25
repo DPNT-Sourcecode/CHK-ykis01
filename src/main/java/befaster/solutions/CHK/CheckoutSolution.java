@@ -63,16 +63,28 @@ public class CheckoutSolution {
     class PricingInfo {
         private final int regularPrice;
         private final Map<Integer, Integer> specialQuantityOffer;
+        private final Map<Integer, Character> specialBundleOffer;
 
         PricingInfo(int regularPrice) {
             this.regularPrice = regularPrice;
             this.specialQuantityOffer = Collections.emptyMap();
+            this.specialBundleOffer = Collections.emptyMap();
+
         }
 
         PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers) {
             this.regularPrice = regularPrice;
             this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
             this.specialQuantityOffer.putAll(specialQuantityOffers);
+            this.specialBundleOffer = Collections.emptyMap();
+        }
+        
+        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers, Map<Integer, Character> specialBundleOffer) {
+            this.regularPrice = regularPrice;
+            this.specialQuantityOffer = new TreeMap<>(Collections.reverseOrder());
+            this.specialQuantityOffer.putAll(specialQuantityOffers);
+            this.specialBundleOffer = new TreeMap<>(Collections.reverseOrder());
+            this.specialBundleOffer.putAll(specialBundleOffer);
         }
 
         public int getRegularPrice() {
@@ -82,13 +94,13 @@ public class CheckoutSolution {
         public Map<Integer, Integer> getSpecialQuantityOffers() {
             return specialQuantityOffer;
         }
-
-        @Override
-        public String toString() {
-            return "PricingInfo [regularPrice=" + regularPrice + ", specialQuantityOffers=" + specialQuantityOffer + "]";
+        
+        public Map<Integer, Character> getSpecialBundleOffers() {
+            return specialBundleOffer;
         }
     }
 }
+
 
 
 
