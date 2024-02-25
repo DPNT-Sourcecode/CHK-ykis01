@@ -1,16 +1,16 @@
 package befaster.solutions.CHK;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class CheckoutSolution {
     private Map<Character, PricingInfo> inventory;
     
     public CheckoutSolution() {
         this.inventory = new HashMap<>();
-        inventory.put('A', new PricingInfo(50, Map.entry(3, 130)));
-        inventory.put('B', new PricingInfo(30, Map.entry(2, 45)));
+        inventory.put('A', new PricingInfo(50, Map.of(3, 130)));
+        inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
         inventory.put('C', new PricingInfo(20));
         inventory.put('D', new PricingInfo(15));
     }
@@ -62,14 +62,14 @@ public class CheckoutSolution {
     
     class PricingInfo {
         private final int regularPrice;
-        private final Entry<Integer, Integer> specialQuantityOffer;
+        private final Map<Integer, Integer> specialQuantityOffer;
         
         PricingInfo(int regularPrice) {
             this.regularPrice = regularPrice;
-            this.specialQuantityOffer = null;
+            this.specialQuantityOffer = Collections.emptyMap();
         }
         
-        PricingInfo(int regularPrice, Entry<Integer, Integer> specialQuantityOffers) {
+        PricingInfo(int regularPrice, Map<Integer, Integer> specialQuantityOffers) {
             this.regularPrice = regularPrice;
             this.specialQuantityOffer = specialQuantityOffers;
         }
@@ -78,7 +78,7 @@ public class CheckoutSolution {
             return regularPrice;
         }
 
-        public Entry<Integer, Integer> getSpecialQuantityOffers() {
+        public Map<Integer, Integer> getSpecialQuantityOffers() {
             return specialQuantityOffer;
         }
 
@@ -88,8 +88,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
-
