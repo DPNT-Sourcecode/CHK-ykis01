@@ -117,4 +117,21 @@ public class CheckoutSolutionTest {
     public void CHK_R3_043() {
         assertEquals(40, checkout.checkout("FFFFFF"));
     }
+    
+    @Test
+    public void CHK_R5_013() {
+        assertEquals(70, checkout.checkout("K"));
+    }
+    
+    @Test
+    public void CHK_R5_021() {
+        assertEquals(20, checkout.checkout("S"));
+    }
+    
+    @Test
+    public void CHK_R5_026() {
+        assertEquals(17, checkout.checkout("X"));
+    }
+    
 }
+
