@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     private Map<Character, PricingInfo> inventory;
@@ -74,9 +76,17 @@ public class CheckoutSolution {
                 originalSkuQuantity = originalSkuQuantity % triggeringQuantity;
             }
         }
+        
+        int total = 0;
+        
+        // Handle custom bundles
+        
+        Map<Boolean, List<Integer>> groups = intList.stream().collect(Collectors.partitioningBy(s -> s > 6));
+        List<List<Integer>> subSets = new ArrayList<List<Integer>>(groups.values());
+        
+        
 
         // Sum products based on their quantity
-        int total = 0;
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
             Character sku = productQuantity.getKey();
             Integer quantity = productQuantity.getValue();
@@ -211,4 +221,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
