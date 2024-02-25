@@ -12,5 +12,3 @@ public class HelloSolution {
         return "Hello, " + name + "!";
     }
 }
-
-

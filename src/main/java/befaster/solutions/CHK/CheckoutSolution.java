@@ -39,7 +39,15 @@ import befaster.runner.SolutionNotImplementedException;
  */
 
 public class CheckoutSolution {
-    private Map<String, PricingInfo> inventory = new HashMap<>();
+    private Map<Character, PricingInfo> inventory;
+    
+    public CheckoutSolution() {
+        this.inventory = new HashMap<>();
+        inventory.put('A', new PricingInfo(50, Map.of(3, 130)));
+        inventory.put('B', new PricingInfo(30, Map.of(2, 45)));
+        inventory.put('C', new PricingInfo(20));
+        inventory.put('D', new PricingInfo(15));
+    }
     
     public Integer checkout(String skus) {
         throw new SolutionNotImplementedException();
@@ -73,5 +81,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
