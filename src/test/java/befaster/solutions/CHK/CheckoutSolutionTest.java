@@ -12,11 +12,6 @@ public class CheckoutSolutionTest {
         checkout = new CheckoutSolution();
     }
 
-    /**
-     * +------+-------+----------------+ | Item | Price | Special offers | +------+-------+----------------+ | A | 50 | 3A for 130 | | B |
-     * 30 | 2B for 45 | | C | 20 | | | D | 15 | | +------+-------+----------------+
-     */
-
     @Test
     public void testCheckout_withoutProducts_returnsZero() {
         assertEquals(0, checkout.checkout(""));
@@ -77,8 +72,6 @@ public class CheckoutSolutionTest {
         assertEquals(80, checkout.checkout("EE"));
     }
     
-    // Failed tests
-
     @Test
     public void CHK_R2_012() {
         assertEquals(155, checkout.checkout("ABCDE"));
@@ -94,6 +87,27 @@ public class CheckoutSolutionTest {
         assertEquals(160, checkout.checkout("BEBEEE"));
     }
     
+    @Test
+    public void test_buy2Fget1F__with1F_returns10() {
+        assertEquals(10, checkout.checkout("FF"));
+    }
+    
+    @Test
+    public void test_buy2Fget1F__with2F_returns10() {
+        assertEquals(10, checkout.checkout("FF"));
+    }
+    
+    @Test
+    public void test_buy2Fget1F_with3F_returns20() {
+        assertEquals(20, checkout.checkout("FFF"));
+    }
+    
+    @Test
+    public void test_buy2Fget1F_with4F_returns20() {
+        assertEquals(20, checkout.checkout("FFFF"));
+    }
+    
 }
+
 
 
