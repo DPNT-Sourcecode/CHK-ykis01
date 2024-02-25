@@ -50,6 +50,27 @@ public class CheckoutSolution {
     }
     
     public Integer checkout(String skus) {
+        // Validate if there aren't any illegal products
+        for (char sku : skus.toCharArray()) {
+            if (!inventory.containsKey(sku)) {
+                return -1;
+            }
+        }
+        
+        // Build the sum of all the products
+        Map<Character, Integer> products = new HashMap<>();
+        for (char sku : skus.toCharArray()) {
+            products.compute(sku, (k, v) -> v == null ? 1 : v + 1);
+        }
+        
+        // Sum based on their quantity
+        for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
+            Character sku = productQuantity.getKey();
+            Integer quantity = productQuantity.getValue();
+            
+        }
+        
+        
         throw new SolutionNotImplementedException();
     }
     
@@ -81,3 +102,4 @@ public class CheckoutSolution {
         }
     }
 }
+
