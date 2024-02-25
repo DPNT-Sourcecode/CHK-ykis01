@@ -20,23 +20,12 @@ public class CheckoutSolution {
     }
 
     public Integer checkout(String skus) {
-        // Validate if the skus aren't null
-        if (skus == null) {
+        if (!validateInput(skus)) {
             return -1;
         }
 
-        // Validate if there aren't any illegal products
-        for (char sku : skus.toCharArray()) {
-            if (!inventory.containsKey(sku)) {
-                return -1;
-            }
-        }
-
         // Build the sum of all the products
-        Map<Character, Integer> products = new HashMap<>();
-        for (char sku : skus.toCharArray()) {
-            products.compute(sku, (k, v) -> v == null ? 1 : v + 1);
-        }
+        Map<Character, Integer> products = createSkusMap(skus);
         
         // Build any bundles there might exist
         for (Map.Entry<Character, Integer> productQuantity : products.entrySet()) {
@@ -91,6 +80,30 @@ public class CheckoutSolution {
         }
 
         return total;
+    }
+    
+    private boolean validateInput(String skus) {
+        // Validate if the skus aren't null
+        if (skus == null) {
+            return false;
+        }
+
+        // Validate if there aren't any illegal products
+        for (char sku : skus.toCharArray()) {
+            if (!inventory.containsKey(sku)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private Map<Character, Integer> createSkusMap(String skus) {
+        Map<Character, Integer> products = new HashMap<>();
+        for (char sku : skus.toCharArray()) {
+            products.compute(sku, (k, v) -> v == null ? 1 : v + 1);
+        }
+        return products;
     }
 
     class PricingInfo {
@@ -163,6 +176,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
