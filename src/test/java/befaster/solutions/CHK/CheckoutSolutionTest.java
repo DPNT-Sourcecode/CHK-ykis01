@@ -89,25 +89,28 @@ public class CheckoutSolutionTest {
     
     @Test
     public void test_buy2Fget1F__with1F_returns10() {
-        assertEquals(10, checkout.checkout("FF"));
+        assertEquals(10, checkout.checkout("F"));
     }
     
-    @Test
-    public void test_buy2Fget1F__with2F_returns10() {
-        assertEquals(10, checkout.checkout("FF"));
-    }
     
     @Test
     public void test_buy2Fget1F_with3F_returns20() {
         assertEquals(20, checkout.checkout("FFF"));
     }
+
+    @Test
+    public void CHK_R3_039() {
+        assertEquals(20, checkout.checkout("FF"));
+    }
     
     @Test
-    public void test_buy2Fget1F_with4F_returns20() {
-        assertEquals(20, checkout.checkout("FFFF"));
+    public void CHK_R3_041() {
+        assertEquals(30, checkout.checkout("FFFF"));
+    }
+    
+    @Test
+    public void FFFFFF() {
+        assertEquals(40, checkout.checkout("FFFFFF"));
     }
     
 }
-
-
-
